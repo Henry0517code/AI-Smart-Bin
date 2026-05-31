@@ -52,7 +52,10 @@ def main():
                 continue
 
             send_command(ser, command)
-            read_serial_line(ser)
+            while True:
+                line = read_serial_line(ser)
+                if line is None:
+                    break
 
 
 if __name__ == "__main__":
