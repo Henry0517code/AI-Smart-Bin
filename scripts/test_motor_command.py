@@ -12,6 +12,15 @@ def parse_args():
     return parser.parse_args()
 
 
+def read_serial_line(ser):
+    raw = ser.readline()
+    if not raw:
+        return None
+    decoded = raw.decode("utf-8", errors="replace").strip()
+    print(f"received: {decoded!r}")
+    return decoded
+
+
 def send_command(ser, command: int):
     ser.write(f"{command}\n".encode("utf-8"))
     ser.flush()
@@ -43,6 +52,7 @@ def main():
                 continue
 
             send_command(ser, command)
+            read_serial_line(ser)
 
 
 if __name__ == "__main__":
