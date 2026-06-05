@@ -30,7 +30,7 @@ def send_command(ser, command: int):
 def main():
     args = parse_args()
 
-    with serial.Serial(args.port, args.baud, timeout=1) as ser:
+    with serial.Serial(args.port, args.baud, timeout=3) as ser:
         time.sleep(args.delay)
         ser.reset_input_buffer()
 
